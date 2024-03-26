@@ -23,7 +23,7 @@ df = pd.read_gbq(sql, dialect="standard", credentials=credentials)
 st.dataframe(df)
 
 
-st.title("🦜🔗 Langchain Quickstart App")
+st.title("🦜🔗 Langchain Quickstart App v2")
 
 with st.sidebar:
     openai_api_key = st.text_input("OpenAI API Key", type="password")
