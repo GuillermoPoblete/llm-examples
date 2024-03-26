@@ -20,6 +20,8 @@ credentials = service_account.Credentials.from_service_account_info(
 #credentials = service_account.Credentials.from_service_account_info(info)
 sql = "SELECT * FROM `brainai-382204.cognify.menningersynth`"
 df = pd.read_gbq(sql, dialect="standard", credentials=credentials)  
+st.dataframe(df)
+
 
 st.title("🦜🔗 Langchain Quickstart App")
 
@@ -40,4 +42,3 @@ with st.form("my_form"):
         st.info("Please add your GuilleFP1! OpenAI API key to continue.")
     elif submitted:
         generate_response(text)
-    st.dataframe(df)
