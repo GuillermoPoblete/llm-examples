@@ -6,18 +6,18 @@ import json
 import pandas_gbq
 import pandas as pd
 credentials = service_account.Credentials.from_service_account_info(
-    st.secrets[""]
+    st.secrets["gcp_service_account"]
 )
 
 
 #os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "C:/Users/Dell/OneDrive - BrainAI/Cognify/mvp/gcp_service_account.json"
 
 
-with open("C:/Users/Dell/OneDrive - BrainAI/Cognify/mvp/gcp_service_account.json") as source:
-    info = json.load(source)
+#with open("C:/Users/Dell/OneDrive - BrainAI/Cognify/mvp/gcp_service_account.json") as source:
+#    info = json.load(source)
 
 
-credentials = service_account.Credentials.from_service_account_info(info)
+#credentials = service_account.Credentials.from_service_account_info(info)
 sql = "SELECT * FROM `brainai-382204.cognify.menningersynth`"
 df = pd.read_gbq(sql, dialect="standard", credentials=credentials)  
 
