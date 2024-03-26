@@ -1,5 +1,25 @@
 import streamlit as st
 from langchain.llms import OpenAI
+from google.oauth2 import service_account
+from google.cloud import bigquery
+import json
+import pandas_gbq
+import pandas as pd
+credentials = service_account.Credentials.from_service_account_info(
+    st.secrets[""]
+)
+
+
+#os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "C:/Users/Dell/OneDrive - BrainAI/Cognify/mvp/gcp_service_account.json"
+
+
+with open("C:/Users/Dell/OneDrive - BrainAI/Cognify/mvp/gcp_service_account.json") as source:
+    info = json.load(source)
+
+
+credentials = service_account.Credentials.from_service_account_info(info)
+sql = "SELECT * FROM `brainai-382204.cognify.menningersynth`"
+df = pd.read_gbq(sql, dialect="standard", credentials=credentials)  
 
 st.title("🦜🔗 Langchain Quickstart App")
 
@@ -20,3 +40,4 @@ with st.form("my_form"):
         st.info("Please add your GuilleFP1! OpenAI API key to continue.")
     elif submitted:
         generate_response(text)
+    st.dataframe(df)
